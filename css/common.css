@@ -1,0 +1,6 @@
+@charset "utf-8";
+html,body{margin:0;padding:0}
+#wrapper{height:100%;}
+#container{height:100%;}
+.event-width{height:90%;margin:50px auto;max-width:100%;}
+.event-sec{height:100%;}
