@@ -1,7 +1,7 @@
 # pocavolley
 
 원본 참고 : https://gorisanson.github.io/pikachu-volleyball/ko/
-(문제 시 repo 삭제하겠습니다.)
+(문제 시 본 프로 삭제하겠습니다.)
 
 *피카츄 배구 테스트입니다.
 로컬 플레이 : index.html
