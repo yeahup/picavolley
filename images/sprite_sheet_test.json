@@ -1,0 +1,21 @@
+{"frames": [
+
+{
+	"filename": "ball/ball_0.png",
+	"frame": {"x":88,"y":158,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "sprite_sheet.png",
+	"format": "RGBA8888",
+	"size": {"w":476,"h":885},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:bc39cfe4c7bb2b217373dc21b633e35b:05248f354d7463b1eac75b9b0d492716:6cc8953523e0367402f95f3c9a630665$"
+}
+}
