@@ -407,6 +407,10 @@ class PicaGame extends Phaser.Scene {
 			// picaVolley.ball.object.body.setAllowGravity(true)
 			// state = CONSTANTS.CONFIGS.STATE_PLAYING;
 		 // });
+
+		this.physics.world.setBounds(0, -100, CONSTANTS.CONFIGS.FRAME_WIDTH_OUT, CONSTANTS.CONFIGS.FRAME_HEIGHT_OUT + 100)
+
+		drawCloudsAndWave();
 	}
 	
 	update(time, delta){
@@ -547,7 +551,7 @@ physics: {
 		debugVelocityColor: 0xffff00,
 		debugBodyColor: 0x0000ff,
 		debugStaticBodyColor: 0xffffff,
-		gravity: { y: 550 },
+		gravity: { y: 950 },
 		fps: 60
 	},
 }
@@ -981,11 +985,17 @@ function getWait(){
 	
 	picaVolley.player1 = new Player(false, 1, 6, 8, player, player_shadow, false, true, 1, false);
 	
-	
+	player.setSize(32, 50);
+	player.setOffset(25, 15);
 	//player.setFriction(0.01);
-	
+	//player.setDisplayOrigin(5555, 405);
+
 	var player2 = t.physics.add.sprite(CONSTANTS.CONFIGS.FRAME_WIDTH_OUT - (GROUND_HALF_WIDTH * 1/4), PLAYER_TOUCHING_GROUND_Y_COORD , 'img pack', TEXTURES.PIKACHU(0,0));
 
+	player2.setSize(32, 50);
+	player2.setOffset(15, 15);
+	//player2.setDisplayOrigin(0.6, 0.8);
+	
 	var player2_shadow = t.add.sprite(CONSTANTS.CONFIGS.FRAME_WIDTH_OUT - (GROUND_HALF_WIDTH * 1/4), PLAYER_TOUCHING_GROUND_Y_COORD + PLAYER_HALF_LENGTH - 2, 'img pack', TEXTURES.SHADOW);
 	
 	picaVolley.player2 = new Player(true, 1, 6, 8, player2, player2_shadow, false, false, 2, true);
@@ -1416,7 +1426,7 @@ function makeBGContainer() {
     addChildToParentAndSetLocalPosition(bgContainer, tile, 213, 184 + 8 * j);
   }
   
-  var bloxk_net = t.add.rectangle(216, 176 + (8*6), 2, 8*12, 0x6666ff);
+  var bloxk_net = t.add.rectangle(216, 176 + (8*6), 2, 8*11, 0x6666ff);
   t.physics.add.existing(bloxk_net, true);
   picaVolley.boundTiles.push(bloxk_net);
 
@@ -1429,7 +1439,7 @@ function makeBGContainer() {
   picaVolley.groundTiles.push(block_right);
   
   
-  var block_upper = t.add.rectangle(GROUND_HALF_WIDTH, 0, CONSTANTS.CONFIGS.FRAME_WIDTH_OUT, 1, 0x6666ff);
+  var block_upper = t.add.rectangle(GROUND_HALF_WIDTH, -70, CONSTANTS.CONFIGS.FRAME_WIDTH_OUT, 1, 0x6666ff);
   t.physics.add.existing(block_upper, true);
   picaVolley.ceilingTiles.push(block_upper);
   
@@ -1490,9 +1500,9 @@ function setPlayerPosition(player, other_player, userInput, position, setMove){
 		
 		if(position == 0)
 		{
-			if(player.getX() <= player.object.width/2)
+			if(player.getX() <= player.object.width/4)
 			{
-				player.object.x = player.object.width/2;
+				player.object.x = player.object.width/4;
 			}
 			else if(player.getX() > GROUND_HALF_WIDTH - player.object.width/2 - 5)
 			{
@@ -1505,9 +1515,9 @@ function setPlayerPosition(player, other_player, userInput, position, setMove){
 			{
 				player.setX(GROUND_HALF_WIDTH + player.object.width/2 + 5);
 			}
-			else if(player.getX() > GROUND_WIDTH - player.object.width/2)
+			else if(player.getX() > GROUND_WIDTH - player.object.width/4)
 			{
-				player.setX(GROUND_WIDTH - player.object.width/2);
+				player.setX(GROUND_WIDTH - player.object.width/4);
 			}
 		}
 	}
@@ -1524,7 +1534,7 @@ function setPlayerPosition(player, other_player, userInput, position, setMove){
 		
 		if(setMove)
 		{
-			player.object.setVelocity(0, player.speed * 65 * userInput.yDirection);
+			player.object.setVelocity(0, player.speed * 80 * userInput.yDirection);
 		}
 		
 		player.playMotion("pica jump");
@@ -1542,7 +1552,7 @@ function setPlayerPosition(player, other_player, userInput, position, setMove){
 		
 			if(setMove)
 			{
-				player.object.setVelocity(player.speed * 40 * userInput.xDirection, -100);
+				player.object.setVelocity(player.speed * 40 * userInput.xDirection, -130);
 			}
 			
 			
@@ -1616,7 +1626,7 @@ function hitBall(player, ball, userInput) {
 		
 		if(player_team != 2)
 		{
-			var speed = 600;
+			var speed = 800;
 			var xVelocity = 0;
 			var yVelocity = 0;
 			
@@ -1647,16 +1657,16 @@ function hitBall(player, ball, userInput) {
 	}
 	else
 	{
-		var speed = 450;
+		var speed = 600;
 		var vX = 0;
 		
 		if(ball.object.x > player.object.x)
 		{
-			vX = 6;
+			vX = (ball.object.x - player.object.x) /5;//6;
 		}
 		else if(ball.object.x < player.object.x)
 		{
-			vX = -6;
+			vX = (ball.object.x - player.object.x) /5;//-6;
 		}
 		
 		//var directionVector = new Vector2(ball.object.body.velocity.x, -ball.object.body.velocity.y);//new Vector2((ball.object.x - player.object.x - (ball.object.body.velocity.x/20)), (ball.object.y - player.object.y));
